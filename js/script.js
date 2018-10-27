@@ -84,7 +84,7 @@ function printQuote(){
     fullQuote += `<span class="year">${newPhrase.year}</span>`;
   }
   fullQuote += `</p>`;
-  quoteBox.append(fullQuote);
+  quoteBox.innerHTML = fullQuote;
   //sourceBox.append(` (Category: ${newPhrase.category})`);
 }
 
