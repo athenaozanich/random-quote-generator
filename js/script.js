@@ -52,57 +52,40 @@ function getRandomQuote(QuotesArray){
   //Return the value of randomPhrase
   return randomPhrase;
 }
-//Function for generating a random hex number for new random bG colors
-function getRandomHex(){
-  //Random generator that returns a number no less or more than 6 digits long.
+
+//Function for generating a hex number for new random bG colors
+function randomBgHex(){
   let randomHex = Math.floor(Math.random()*900000) + 100000;
-  //Return the value or randomHex
-  return randomHex;
+  document.querySelector('body').style.backgroundColor = `#${randomHex}`;
 }
+
 //Function for setting up the display of new quotes
 function printQuote(){
-  //save backdrop color from function
-  let backdropColor = getRandomHex();
-  //apply background color
-  document.querySelector('body').style.backgroundColor = `#${backdropColor}`;
-  //save new phrase to variable
+
+  randomBgHex();
+
+  //Initialize variables
   let newPhrase = getRandomQuote(quotes);
-  //select quotebox
-  let quoteBox = document.querySelector('.quote');
-  //select sourcebox
-  let sourceBox = document.querySelector('.source');
-  //aaply newPhrase to html dom
-  quoteBox.innerHTML = newPhrase.quote;
-  //apply new source to html dom
-  sourceBox.innerHTML = newPhrase.source;
-  //
+  let quoteBox = document.querySelector('#quote-box');
+
+  //Build out the full phrase
+  let fullQuote = `<p class="quote">${newPhrase.quote}</p>`;
+  fullQuote += `<p class="source">${newPhrase.source}`;
+
+  //Conditional for citation display
   if (newPhrase.citation){
-    //create the span for citation
-    let citation = document.createElement('SPAN');
-    //give span a class of citation
-    citation.classList.add("citation");
-    //create text for citation
-    let citeText = document.createTextNode(` ${newPhrase.citation}`);
-    //append citation to span
-    citation.appendChild(citeText);
-    //append span to the source element
-    sourceBox.appendChild(citation);
-  }
 
+    fullQuote += `<span class="citation">${newPhrase.citation}</span>`;
+    console.log(fullQuote);
+    //sourceBox.appendChild(citation);
+  }
+  //Conditional for year display
   if (newPhrase.year){
-    //create the span for year
-    let year = document.createElement('SPAN');
-    //give span a class of year
-    year.classList.add("year");
-    //create text for year
-    let citeYear = document.createTextNode(` ${newPhrase.year},`);
-    //append year to span
-    year.appendChild(citeYear);
-    //append span to the source element
-    sourceBox.appendChild(year);
+    fullQuote += `<span class="year">${newPhrase.year}</span>`;
   }
-
-  sourceBox.append(` (Category: ${newPhrase.category})`);
+  fullQuote += `</p>`;
+  quoteBox.append(fullQuote);
+  //sourceBox.append(` (Category: ${newPhrase.category})`);
 }
 
 
