@@ -45,11 +45,8 @@ var quotes = [
 //Function for getting the arondom quote from the array of objects
 
 function getRandomQuote(QuotesArray){
-  //Dynamic random based on the number of phrases in the array
   let random = Math.floor(Math.random() * QuotesArray.length);
-  //Use random to select a phrase
   let randomPhrase = QuotesArray[random];
-  //Return the value of randomPhrase
   return randomPhrase;
 }
 
@@ -61,9 +58,6 @@ function randomBgHex(){
 
 //Function for setting up the display of new quotes
 function printQuote(){
-
-  randomBgHex();
-
   //Initialize variables
   let newPhrase = getRandomQuote(quotes);
   let quoteBox = document.querySelector('#quote-box');
@@ -72,20 +66,20 @@ function printQuote(){
   let fullQuote = `<p class="quote">${newPhrase.quote}</p>`;
   fullQuote += `<p class="source">${newPhrase.source}`;
 
-  //Conditional for citation display
+  //Conditional for source display
   if (newPhrase.citation){
-
     fullQuote += `<span class="citation">${newPhrase.citation}</span>`;
-    console.log(fullQuote);
-    //sourceBox.appendChild(citation);
   }
-  //Conditional for year display
   if (newPhrase.year){
     fullQuote += `<span class="year">${newPhrase.year}</span>`;
   }
+  if (newPhrase.category){
+    fullQuote += `<span class="category"> (Category: ${newPhrase.category})</span>`;
+  }
+
   fullQuote += `</p>`;
   quoteBox.innerHTML = fullQuote;
-  //sourceBox.append(` (Category: ${newPhrase.category})`);
+  randomBgHex();
 }
 
 
