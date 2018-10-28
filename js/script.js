@@ -43,30 +43,28 @@ var quotes = [
 
 
 //Function for getting the arondom quote from the array of objects
-
 function getRandomQuote(QuotesArray){
   let random = Math.floor(Math.random() * QuotesArray.length);
   let randomPhrase = QuotesArray[random];
   return randomPhrase;
-}
+}//end getRandomQuote
+
 
 //Function for generating a hex number for new random bG colors
 function randomBgHex(){
   let randomHex = Math.floor(Math.random()*900000) + 100000;
   document.querySelector('body').style.backgroundColor = `#${randomHex}`;
-}
+}//end randomBgHex
+
 
 //Function for setting up the display of new quotes
 function printQuote(){
-  //Initialize variables
   let newPhrase = getRandomQuote(quotes);
   let quoteBox = document.querySelector('#quote-box');
-
-  //Build out the full phrase
   let fullQuote = `<p class="quote">${newPhrase.quote}</p>`;
-  fullQuote += `<p class="source">${newPhrase.source}`;
 
-  //Conditional for source display
+  //Build out the display
+  fullQuote += `<p class="source">${newPhrase.source}`;
   if (newPhrase.citation){
     fullQuote += `<span class="citation">${newPhrase.citation}</span>`;
   }
@@ -76,11 +74,11 @@ function printQuote(){
   if (newPhrase.category){
     fullQuote += `<span class="category"> (Category: ${newPhrase.category})</span>`;
   }
-
   fullQuote += `</p>`;
+  
   quoteBox.innerHTML = fullQuote;
   randomBgHex();
-}
+}//end printQuote
 
 
 //Event listener for button click on loadQuote
